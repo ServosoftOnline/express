@@ -1,0 +1,12 @@
+- EXPRESS ROUTER
+
+    - Concepto router:
+
+        - Permite tener varios archivos que contengan las rutas y no almacenarlas en uno solo
+        - Creo muchos archivos y los unimos todos en una aplicación y los almaceno en una carpeta (router)
+
+    - Módulo express router:
+
+        - Express tiene un módulo llamado router que se encarga de esta gestion
+        - Las rutas almacenadas en cada uno de los archivos seran exportadas
+        - index.js, el archivo que antes las tenia todas, las importará un index.js y las usará

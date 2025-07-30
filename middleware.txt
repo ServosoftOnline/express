@@ -1,0 +1,79 @@
+- FUNCION MIDDLEWARE
+
+    - Son funciones intermedias creadas por mí o importadas desde express que pueden ejecutarse en express
+
+    - Se ejecutan antes de acceder a las rutas declaradas en el backend:
+        - Suele usarse para registrar informacion que llega al servidor (logging y loggers)
+            - A esta accion se le llama logging
+            - A las funciones que registrar los datos se les llama loggers
+            - Esta informacion registrada suelen ser rutas, metodos, ...
+
+    - Implica el uso del metodo use en cuyo interior ejecutamos una función que no es necesario llamarla
+    - La declaro al principio del servidor de tal forma que todas las peticiones pasarán antes por ella        
+
+    - Dispone de un parámetro extra ademas de request y response que se llama next, que es una funcion
+
+        - Sirve para que una vez se ejecute continue leyendo las rutas
+        - Es obligatorio su presencia en los middlewares           
+        
+        - Es una función muy importante para tener control en el routing. 
+            - La llamo cuando quiero que continue leyendo la siguiente ruta
+            - Si no la llamo enviaré una respuesta al cliente y acabará la lectura del routing
+
+        - Las funciones usadas en el routing que no son middlewares tambien pueden tener la funcion next()
+            - Avanzando así en el routing llegado a este punto
+            - No es frecuente
+
+    - Puedo usar un middleware para proteger rutas:   
+
+        - No tengo porque declarar todas los middlewares y despues las rutas.            
+        - Puedo tener un middleware que obtenga información que llega al servidor
+        - Declarar las rutas de acceso publico para todos los usuarios
+        - Tener otro middleware que verifique si un usuario está registrado en la bbdd.
+            - Si el usuario está registrado llamo a la funcion next y continuo con las rutas privadas
+                - Las rutas que sean privadas iran a continuacion de este segundo middleware
+                - Protegiendo estas rutas y dejando solo acceso a ellas a los usuarios registrados
+            - Si no lo está el servidor devuelve una respuesta de usuario no registrado y no ejecuta la funcion next()
+
+    - Existen paquetes que permiten añadir middleware externas desde express
+
+        - Se suelen conocer a traves de la comunidad
+
+        - Un ejemplo de middleware externo es morgan
+
+            - Permite ver por consola las peticiones que van llegando
+            - Evitar tener que crear un logger a mano.
+
+            - Instalacion:
+
+                - Escribir en consola: npm i morgan
+                - Requerirlo: const morgan = require('morgan')
+                - Sustituyo mi logger creado a mano por: app.use(morgan())
+                    - Mostrará en consola las peticiones mediante mensajes que puedo modificar
+
+                    - Dentro de la funcion morgan puedo añadir un texto que modificará esos mensajes
+                        - morgan('tiny')
+
+                        - morgan('dev')
+                            - Muestra el metodo de la peticion
+                            - La url
+                            - El estado de la peticion
+                            - El tiempo de respuesta de la peticion
+                            - Y cuanto pesó la respuesta
+
+                        - morgan('short')
+
+        - Al enviar diferentes tipos de datos mediante REQUEST BODY tambien uso middlewares:
+
+            - app.use(express.text()). Cuando recibo texto
+            - app.use(express.json()). Cuando recibo un objeto json
+            - app.use(express.urlencoded({extended: false})). Cuando recibo datos desde un formulario
+            - Ver uso de estos ejemplos en index.js
+
+        - En las pruebas de index.js donde envio
+        - Existen diferentes middlewares de express para: 
+
+            - Subir imágenes
+            - Comprobar si el usuario tiene valor dentro de su peticion como cookies
+            - Validar datos
+            - .....

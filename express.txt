@@ -1,0 +1,58 @@
+EXPRESS:
+
+    - Curso basado en el video de youtube: https://www.youtube.com/watch?v=JmJ1WUoUIK4
+    - Framework más popular de nodeJs que posee las siguiente características:
+
+        - Fué unos de los primeros en aparecer.
+        - Es un framework unopionated:
+            - No nos indica como crear la estructura del proyecto
+            - Ni como escribir el proyecto.
+            -  Es más versatil y ligero que otros.
+
+        - Permite crear aplicaciones grandes añadiendo módulos
+
+        - Se basa en código javascript creado por otros programadores
+            - Permite usar bases de programación creadas por otros desarroladores para desarrollar encima mi aplicación
+            - Podría usar código de nodejs, pero tendría que estar creando mucho código desde el inicio como:
+                - Para leer archivos
+                - Crear rutas de servidor
+                - Asegurar la aplicación
+                - Subir archivos
+                - etc
+                - Evitan tener que estar creando este código una y otra vez
+
+        - Permite crear tiendas vituales, redes sociales y aplicaciones webs en general
+        - React, angular o view se basan en nodejs
+                
+    - Otros frameworks:
+        - happy
+        - fast afy
+
+        - NestJs. Se considera el sucesor de express
+            - Ver las diferencias con express en el video: https://www.youtube.com/watch?v=EYCrmB_JvlI
+            - NestJs crea una estructura de carpetas que se suele seguir
+            - Express viene con una serie de paquetes definidos, que no estoy seguro que se usen, y nestJs no
+                - Con nestJs debemos elegir que paquetes utilizar y que debemos tenerlos actualizados
+            - nestJs esta más influenciada por Angular.
+            - nestJs usa typescript por defecto teniendo soporte nativo. Está más orientado a typescript
+            - nestJs tiene una curva de aprender más pronunciada
+            - express es mucho más popular y se usa más en las industrias. Es más robusto y tiene pocos cambios
+            - express se podría usar en proyectos más pequeños y nestJs en proyectos que necesiten mas estructuracion
+            - Si no van a escarlar demasiado es recomendable usar express
+            - Trabajar en equipo se mejora con nestJs
+            - Sería recomendable empezar con javascript y espress. Para despues trabajar con typescript y nestJs
+
+        - Adonis
+        - lockback
+
+    - Stacks:
+        - Son conjuntos de tecnologías para crear aplicaciones completas, todas basadas en javascript
+            - stack mern incluye: Mongodb, Express, React, y Node
+            - stack mean incluye: Mongodb, Express, Angular y Node.
+
+    - Instalacion de express:
+        - Instalar nodejs: npm i node o descargarlo desde ubuntu software
+        - Instalar express: npm i express
+    
+
+    

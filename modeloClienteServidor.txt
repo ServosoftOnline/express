@@ -1,0 +1,14 @@
+
+BASES DEL MODELO CLIENTE - SERVIDOR Y COMO APLICARLO EN EXPRESS:
+
+1.- Existe un cliente ubicado en el front
+2.- Existe un servidor ubicado en el backend
+3.- Ambos se comunican mediante el protocolo http usando diferentes métodos, también llamados verbos o peticiones
+4.- El cliente le hace peticiones (request) al servidor y el servidor le responde (response) datos o un error
+5.- Para crear el servidor puedo usar el modulo http de commonJs o usar un framework
+
+6.- En este tutorial usaré el framework express para crear el servidor web 
+    - Será más facil porque escribiré menos código
+    - Permitirá tener una mayor escalabilidad
+
+7.- El archivo index.js contiene ejemplos practicos sobre como se aplica.

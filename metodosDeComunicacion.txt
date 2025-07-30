@@ -1,0 +1,129 @@
+- METODOS DE COMUNICACION DEL PROTOCOLO HTTP:    
+        
+    - get.        
+        - El cliente obtiene algo del servidor.
+        - Se usa frecuentemente en el routing al entrar en una ruta determinada.
+        - Es la peticion por defecto
+
+    - post
+        - El cliente le envia datos al servidor que quizas él guarde
+        - El servidor puede devolverle datos
+
+    - put
+        - El cliente trata de actualizar algo del servidor
+        - Enviamos un id que localiza el servidor y actualiza todos sus datos
+    
+    - delete
+        - El cliente trata de eliminar algo del servidor
+        - Le enviamos un id, lo busca y si lo encuentra elimina los datos
+
+    - patch
+        - Es igual que el verbo put pero solo actualiza un campo, no todo el registro
+    
+    - all
+        - Engloba a todos los métodos anteriores.
+        - 
+
+    - Como probar estos métodos:
+
+        - El método get se prueba de una forma y el resto de otra
+        - Declaro mi routing en mi archivo index.js:
+
+            app.get('/', (req, res) => {
+                res.send('Página asociada a la raiz del proyecto cuando uso el método get')
+            })
+
+            app.get('/about', (req, res) => {
+                res.send('Página asociada al Acerca de del proyecto')
+            })
+
+            app.post('/', (req, res) => {
+                res.send('Página asociada a la raiz del proyecto cuando uso el método post')
+            })
+
+        - Para probar las rutas realizadas con get solo debo abrir el navegador, poner la ruta y ver el mensaje
+        - Para probar los métodos post, put, delete, patch y el resto que valla a usar es diferente:
+            - Si me encargo tambien del front hacer peticiones desde el código de front
+            - En caso contario debo simular estas peticiones mediante el uso de la extension thunder client de VS
+                - Desde el icono thunder cliente creado en la columna de la izquierda creo New request
+        - Para probar un metodo all puedo usar el navegador, desde el front o thunder client
+            - Encontraría las ruta usando cualquier método
+
+
+- HTTP RESPONSE
+
+    - Son las respuestas que emite el servidor creado mediante express usando el protocolo http
+        - Puede responder: texto, archivos html, pdf, txt, vídeos, audios, o formatos json o xml, etc.
+        - Un ejemplo de responder un objeto json. Al entrar en una ruta /user devolver información del usuario
+            - la web https://jsonformatter.curiousconcept.com/ permite comprobar si un objeto json es válido
+
+    - Los servidores creados con express devuelven un estado indicando el resultado de la operacion. Ejemplos:
+        - Estado 404 significa que el servidor no encontró lo que intentaba hacer
+        - Estado 500 significa error interno del servidor
+
+        - Estado 200 indica que fue todo bien y el servidor responde con algo.
+            - A veces aparece este código de estado despues de actualizar y antes devolvía otro codigo de estado
+            - Esto significa que la segunda vez, cuando refresca, se almacenó ya el dato en la cache
+
+        - Estado 204 indica que fue todo bien pero el servidor no devuelve nada.            
+            - Devolvería solo el estado y ningun dato
+            - Para ello usaría le método sendStatus(Codigo de estado)
+
+        - Estado 304 indica que se esta pidiendo un datos que no ha sido modificado
+        - Puedo enviar el código de estado que considero si uso el método sendStatus
+            - Ver como se hace en la ruta /isAlive mediante el metodo get en index.js
+
+                
+- REQUEST BODY
+
+    - Durante una peticion desde el cliente se pueden enviar distintos tipos de datos al servidor:
+
+        - Como textos, objetos jason, archivos o datos a partir de un formulario del front
+        - Estas peticiones se realizarían mediante el metodo post ya que se van a enviar datos
+        
+        - Mediante el método use le debo indicar el dato que recibirá el servidor:
+            - Si recibe un string => app.use(express.text())
+            - Si recibe un json => app.use(express.json()) 
+            - Si recibe datos de un formulario => app.use(express.urlencoded({extended: false}))
+                - extended: false indica que no debe interpretar nada. Ningun dato recibido es complicado
+
+
+        - Estas peticiones las puedo considerar como un objeto llamado request con el siguiente contenido:
+            - endpoint. Sería la url que ha sido visitada
+            - body. Sería el dato enviado, generalmente un objeto json.
+            - header. Contendría información adicional como el tipo de dato enviado
+
+        - Las respuestas de un servidor las obtenemos mediante un objeto llamado response
+            - Este tendría la misma estructura que el objeto request anterior. (endpoint, body y header)
+            - Y el código del estado vendría dentro del header como información adicional
+
+    - Podemos usar un cliente rest para simular estos envios desde el cliente añadiendo datos.
+        - El cliente rest podría ser la extension thunder client de VS antes mencionado
+        - Simulando el envio por el método que sea, añadiendo el endpoint
+        - Selecciono Body y el tipo de dato que simulo enviar y su contenido
+        - El header lo añadirá thunder client de forma automática. Desde el front tendré que enviarlas yo.
+        - Para simular el envio de datos mediante un formulario debo seleccionar body/form-encode
+
+- REQUEST PARAMS
+    
+    - Permite realizar peticiones con rutas dinámicas.
+    - Se enviarán como un objeto con sus conjuntos propiedad-valor
+    - En la ruta añado : seguido del nombre de la propiedad y así declaro que es dinámica
+    - Usaré el metodo params desde el servidor para obtenerlos
+    - Desde el navegador pasaré el valor
+    - Me va a permitir envias IDs desde la barra del navegador y capturarlos desde el servidor
+    - Todo parámetro recibido es un string
+        - Si quiero cambiarle su tipo uso parseInt, parseFloat, etc
+
+- QUERIES
+
+    - Permite declarar variables y enviarlas al backend anteponiendo el caracter ?vbleEnvidada=valorEnviado
+    - Desde el navegador escribimos una ruta como esta: http://localhost:3000/ruta?x=20
+    - En el backend uso el metodo query y obtengo un objeto cuya propiedad es vbleEnviada y su valor es valorEnviado
+        - El valor se recibe como un string al igual que en resquest params
+    
+    - Puedo añadir mas variables añadiendo un & por ejemplo ?vble1=valorVble1&vble2=valorVble2     
+    - Puedo enviar mas de un dato en una sola vble por ejemplo ?vble1=valor1&vble1=valor2
+        - El servidor recibe un objeto cuya propiedad es vble1 y su valor es una array formado por valor1 y valor2
+
+    - Puedo acceder a las variables directamente usando el metodo query.vble

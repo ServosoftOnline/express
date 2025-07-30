@@ -1,0 +1,23 @@
+- SETTINGS
+
+        - Permite definir variables que estarán presentes durante todo el script y/o reconfigurar express
+            - Se definen antes de los middlewares
+            - Permite tener todas esas variables en el mismo lugar
+            - Un ejemplo de reconfiguracion de express sería 'case sensitive routing'
+                - No es usual.
+                - Fuerza a que las rutas se escriban exactamente como se definieron para ser válidas
+                - app.set('case sensitive routing', true)
+                    - hace que una ruta definida como /Ruta solo sea valida si la escribo así en el navegador
+                    - Si la dejo en false, que es el valor por defecto, /ruta sería válida
+
+            - Existen módulos que necesitan de estas configuraciones para funcionar
+
+        - Se definen al principio del script mediante el método set y se accede a ellas mediante el método get
+
+        - Ej: 
+            const express = require("express")
+            const app = express()
+            app.set('vble', valor)
+            app.get('vble')
+
+        - Ver ejemplo en index.js

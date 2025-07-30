@@ -1,0 +1,16 @@
+- STATIC FILES
+
+    - Si quiero enviar mas de un archivo es mejor no usar el método sendFile. Sería muy tedioso.
+    - Es mejor crear una carpeta publica donde almacenar los archivos index.html, estilos.css, index.js, ...
+        - Y esos archivos pasarán a ser publicos            
+
+    - Para ello usaré el middleware static propio de express donde almacenaré los archivos mencionados
+
+        - Al declarar el middleware añadiré la ruta publica como prefijo y lo haré al final de las rutas publicas
+        - Si existieran dos archivos con el mismo nombre el prefijo me permitirá dirijirme a uno u otro
+        - En el proyecto existen dos archivos llamados note.txt, uno privado y otro público
+        - El archivo index.js situado en /tutoriales/express/conceptosBasicos hay un ejemplo del uso de este middleware
+
+    - Se pueden tener mas de una carpeta publica
+        - Los proyectos hechos en react tienen la carpeta dist como publica
+        - Y podemos añadir otra llamada upload donde tener los archivos que queramos compartir

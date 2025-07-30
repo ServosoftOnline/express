@@ -1,0 +1,8 @@
+- MODULO path
+
+        - Si quiero ordenar mejor todo mi código y dejarlo todo organizado en una carpeta src:        
+        - Uso el modulo path para concatenar mi directorio por defecto con cada una de las carpetas publicas
+        - Uso el objeto global __dirname que contiene la ruta absoluta desde mi unidad donde me encuentro
+        - Añadir el método join para unir mi directorio por defecto y la carpeta publica correspondiente
+        - Permitiría que si cambiamos la ubicacion de la carpeta src, la aplicación se mantenga
+        - Ver como se aplica en el archivo index.js
